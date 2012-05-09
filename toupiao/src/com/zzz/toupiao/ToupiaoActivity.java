@@ -1,8 +1,15 @@
 package com.zzz.toupiao;
 
 
+
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +26,12 @@ public class ToupiaoActivity extends Activity {
 	
 	private ViewFlow viewFlow;
 	private String[] mdata={"ces","ces" ,"ces" ,"ces","ces"};
+	Context m_context; 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toupiao_layout);
+        m_context=this;
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		viewFlow.setAdapter(new VoteAdapter(this), 0);
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
@@ -87,6 +96,9 @@ public class ToupiaoActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+//					 VoteDialog dialog=new VoteDialog(getApplicationContext());
+//					dialog.show();
+					dialog();
 					Log.e("TEST","TEST"+position);
 				}
 				
@@ -95,6 +107,31 @@ public class ToupiaoActivity extends Activity {
 			return convertView;
 			
 		}
+		
+		public void dialog() {
+			Intent intent=new Intent();
+			intent.setClass(ToupiaoActivity.this, VoteActvity.class);
+			startActivity(intent);
+//			final VoteDialog dlg = new VoteDialog(m_context);
+//			dlg.show();
+//			  AlertDialog.Builder builder = new Builder(ToupiaoActivity.this);
+//			  builder.setMessage("确认退出吗？");
+//			  builder.setTitle("提示");
+//			  builder.setPositiveButton("确认", new OnClickListener() {
+//			   @Override
+//			   public void onClick(DialogInterface dialog, int which) {
+//			    dialog.dismiss();
+//			    ToupiaoActivity.this.finish();
+//			   }
+//			  });
+//			  builder.setNegativeButton("取消", new OnClickListener() {
+//			   @Override
+//			   public void onClick(DialogInterface dialog, int which) {
+//			    dialog.dismiss();
+//			   }
+//			  });
+//			  builder.create().show();
+			 }
     	
     }
 //    Button.OnClickListener voteButton = new Button.OnClickListener()

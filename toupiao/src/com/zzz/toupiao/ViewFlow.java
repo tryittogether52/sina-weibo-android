@@ -158,6 +158,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 		final int width = MeasureSpec.getSize(widthMeasureSpec);
 		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		if (widthMode != MeasureSpec.EXACTLY && !isInEditMode()) {
+//			return;
 			throw new IllegalStateException(
 					"ViewFlow can only be used in EXACTLY mode.");
 		}
