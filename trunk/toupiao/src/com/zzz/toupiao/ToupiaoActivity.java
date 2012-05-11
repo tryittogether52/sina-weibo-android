@@ -1,8 +1,5 @@
 package com.zzz.toupiao;
-
-
-
-
+import com.zzz.image.ImageThreadLoader;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -11,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,17 +25,40 @@ public class ToupiaoActivity extends Activity {
 	private ViewFlow viewFlow;
 	private String[] mdata={"ces","ces" ,"ces" ,"ces","ces"};
 	Context m_context; 
+	Button m_vote_button;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toupiao_layout);
         m_context=this;
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
-		viewFlow.setAdapter(new VoteAdapter(this), 0);
+		
+		final VoteAdapter voteAdapter=new VoteAdapter(this);
+		viewFlow.setAdapter(voteAdapter, 0);
+		m_vote_button=(Button)findViewById(R.id.framelayout_vote_button);
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		viewFlow.setFlowIndicator(indic);
+		m_vote_button.setOnClickListener(new Button.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				 VoteDialog dialog=new VoteDialog(getApplicationContext());
+//				dialog.show();
+				dialog();
+				Log.e("TEST","TEST"+viewFlow.getSelectedItemPosition());
+			}
+			
+		});
     }
     
+    public void dialog() {
+		Intent intent=new Intent();
+		intent.setClass(ToupiaoActivity.this, VoteActvity.class);
+		startActivity(intent);
+
+		 }
     @Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -46,9 +67,11 @@ public class ToupiaoActivity extends Activity {
     
     public class VoteAdapter extends BaseAdapter{
     	private LayoutInflater mInflater;
-    	
+    	 private final ImageThreadLoader imageLoader;
     	public VoteAdapter(Context context) {
-    		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    		   mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    		   imageLoader = ImageThreadLoader.getOnDiskInstance(context);
+
     	}
     	
 		@Override
@@ -86,6 +109,10 @@ public class ToupiaoActivity extends Activity {
 			}else{
 				holder = (ViewHolder) convertView.getTag();
 			}
+			String imageUrl = null;
+			if(imageUrl!=null){
+				
+			}
 			holder.text_content.setText("今日，关于。。。。。。。");
 			holder.text_time.setText("2012-5-10");
 			holder.text_state.setText("投票进行中");
@@ -98,50 +125,25 @@ public class ToupiaoActivity extends Activity {
 					// TODO Auto-generated method stub
 //					 VoteDialog dialog=new VoteDialog(getApplicationContext());
 //					dialog.show();
-					dialog();
-					Log.e("TEST","TEST"+position);
+//					dialog();
+//					Log.e("TEST","TEST"+position);
 				}
 				
 			});
-//			((ImageView) convertView.findViewById(R.id.imgView)).setImageResource(ids[position]);
+			
 			return convertView;
 			
 		}
 		
-		public void dialog() {
-			Intent intent=new Intent();
-			intent.setClass(ToupiaoActivity.this, VoteActvity.class);
-			startActivity(intent);
-//			final VoteDialog dlg = new VoteDialog(m_context);
-//			dlg.show();
-//			  AlertDialog.Builder builder = new Builder(ToupiaoActivity.this);
-//			  builder.setMessage("确认退出吗？");
-//			  builder.setTitle("提示");
-//			  builder.setPositiveButton("确认", new OnClickListener() {
-//			   @Override
-//			   public void onClick(DialogInterface dialog, int which) {
-//			    dialog.dismiss();
-//			    ToupiaoActivity.this.finish();
-//			   }
-//			  });
-//			  builder.setNegativeButton("取消", new OnClickListener() {
-//			   @Override
-//			   public void onClick(DialogInterface dialog, int which) {
-//			    dialog.dismiss();
-//			   }
-//			  });
-//			  builder.create().show();
-			 }
+//		public void dialog() {
+//			Intent intent=new Intent();
+//			intent.setClass(ToupiaoActivity.this, VoteActvity.class);
+//			startActivity(intent);
+//
+//			 }
     	
     }
-//    Button.OnClickListener voteButton = new Button.OnClickListener()
-//    {
-//      public void onClick(View arg0)
-//      {
-//    	  VoteAdapter.getItemId();
-//        Log.e("TEST","TEST");
-//      }
-//    };
+
     static class ViewHolder {
     	ImageView imageview;
         TextView text_content;
@@ -150,4 +152,14 @@ public class ToupiaoActivity extends Activity {
         TextView text_state;
         Button   button_vote;
       } 
+    
+    private class ImageLoadListener implements ImageThreadLoader.ImageLoadedListener {
+
+		@Override
+		public void imageLoaded(Drawable imageBitmap) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
 }
