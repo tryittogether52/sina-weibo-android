@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/list_background"
+    android:layout_marginTop="30dip"
+    android:layout_marginBottom="30dip" >
+   <LinearLayout 
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_weight="5"
+       >
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="投票的问题"
+            android:textSize="16sp"/>
+    </LinearLayout>
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_dialog"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="发改委称成品油价格“涨多跌少”必然的，你相信吗"/>
+     <RelativeLayout 
+         android:id="@+id/dialog_relativelayout"
+         android:orientation="horizontal"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         >
+         <TextView 
+             android:text="你的态度"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="14sp"
+             android:layout_marginLeft="5dp"
+             />
+        <TextView 
+            android:id="@+id/dialog_number"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:text="2000"
+            android:layout_marginRight="5dp"/>
+        <TextView 
+            android:layout_toLeftOf="@+id/dialog_number"
+             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:text="已头的票："/>
+         </RelativeLayout>
+        <TextView android:id="@+id/text_select_one"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+             android:layout_marginLeft="5dp"
+            android:text="1.相信潜规则存在"/>
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView 
+            android:id="@+id/text_pre_one"
+            android:layout_width="wrap_content"
+             android:layout_marginLeft="5dp"
+            android:layout_height="12dip"
+            android:layout_gravity="center"/>
+          <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dip"
+              android:id="@+id/text_pre_one_number"/>
+        </LinearLayout>
+        <TextView android:id="@+id/text_select_two"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+             android:layout_marginLeft="5dp"
+            android:text="2.不相信潜规则存在"/>
+         <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+             android:layout_gravity="center">
+        <TextView 
+            android:id="@+id/text_pre_two"
+             android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="8dip"
+             android:layout_gravity="center"/>
+        <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dip"
+              android:id="@+id/text_pre_two_number"/>
+        </LinearLayout>
+         <TextView android:id="@+id/text_select_three"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+             android:layout_marginLeft="5dp"
+            android:text="3.不知道"/>
+         
+         <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/three_linearlayout">
+        <TextView 
+            android:id="@+id/text_pre_three"
+            android:layout_width="wrap_content"
+            android:layout_height="8dip"
+             android:layout_marginLeft="5dp"
+              android:layout_gravity="center"/>
+         <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dip"
+              android:id="@+id/text_pre_three_number"/>
+        </LinearLayout>
+       
+     </LinearLayout>
+     
+      <LinearLayout 
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom"
+         android:layout_weight="1"
+         android:orientation="horizontal"
+         >
+
+          <RelativeLayout android:layout_width="fill_parent"
+              android:layout_height="wrap_content" >
+          <Button
+              android:id="@+id/vote_result_colse_button"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dip"
+              android:layout_marginRight="5dip"
+              android:layout_centerInParent="true"
+              android:text="关闭" />
+          </RelativeLayout>
+
+     </LinearLayout>
+    
+
+</LinearLayout>

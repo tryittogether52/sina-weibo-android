@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/com.zzz.toupiao"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
     <com.zzz.toupiao.CircleFlowIndicator
 		android:padding="10dip"
@@ -16,5 +16,14 @@
 	<com.zzz.toupiao.ViewFlow
 		android:id="@+id/viewflow" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" app:sidebuffer="3"></com.zzz.toupiao.ViewFlow>
+	<Button 
+	    android:id="@+id/framelayout_vote_button"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="投票进行中"
+	    android:textSize="18sp"
+	    android:layout_gravity="center_horizontal|bottom"
+	    android:layout_marginBottom="30dip"
+	    />
 
 </FrameLayout>

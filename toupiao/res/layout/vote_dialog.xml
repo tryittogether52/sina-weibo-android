@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/list_background"
+    android:layout_marginTop="30dip"
+    android:layout_marginBottom="30dip" >
+   <LinearLayout 
+     android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_weight="5"
+       >
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        >
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="投票的问题"
+            android:textSize="16sp"/>
+    </LinearLayout>
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_dialog"
+        android:textSize="18sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="发改委称成品油价格“涨多跌少”必然的，你相信吗"/>
+     <RelativeLayout 
+         android:id="@+id/dialog_relativelayout"
+         android:orientation="horizontal"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         >
+         <TextView 
+             android:text="你的态度"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textSize="14sp"
+             android:layout_marginLeft="5dp"
+             />
+        <TextView 
+            android:id="@+id/dialog_number"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:text="2000"
+            android:layout_marginRight="5dp"/>
+        <TextView 
+            android:layout_toLeftOf="@+id/dialog_number"
+             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="14sp"
+            android:text="已头的票："/>
+     </RelativeLayout>
+     <RadioGroup android:layout_width="fill_parent" 
+         android:layout_height="wrap_content" 
+         android:orientation="vertical"
+         android:id="@+id/radiogroup_vote_dialog">
+          <RadioButton 
+                android:id="@+id/radioBtn1" 
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="1.相信随国际变化" 
+               /> 
+            <RadioButton 
+                android:id="@+id/radioBtn2" 
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="2.不信，应破除垄断" 
+               /> 
+            <RadioButton 
+                android:id="@+id/radioBtn3" 
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="3.不关心" 
+               /> 
+     </RadioGroup>
+     </LinearLayout>
+     
+      <LinearLayout 
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_gravity="bottom"
+         android:layout_weight="1"
+         > 
+         <Button android:id="@+id/dialog_vote_button"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_weight="1"
+             android:text="投票"
+             android:layout_marginLeft="5dip"
+             android:layout_marginRight="5dip"
+             />
+         <Button android:id="@+id/dialog_colse_button"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_weight="1"
+             android:text="关闭"
+             android:layout_marginLeft="5dip"
+             android:layout_marginRight="5dip"
+             />
+     </LinearLayout>
+</LinearLayout>
