@@ -14,14 +14,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ToupiaoActivity extends Activity {
     /** Called when the activity is first created. */
-	
+	private static final String LOG_TAG = ToupiaoActivity.class.getName();
 	private ViewFlow viewFlow;
 	private String[] mdata={"ces","ces" ,"ces" ,"ces","ces"};
 	Context m_context; 
@@ -93,7 +95,7 @@ public class ToupiaoActivity extends Activity {
 		}
 
 		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView,final ViewGroup parent) {
 			// TODO Auto-generated method stub
 			ViewHolder holder ;
 			if (convertView == null) {
@@ -110,8 +112,10 @@ public class ToupiaoActivity extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			String imageUrl = null;
+			imageUrl="http://media.npr.org/assets/img/2012/05/11/brooks_sq.jpg?t=1336748245";
 			if(imageUrl!=null){
-				
+				Drawable cachedImage = imageLoader.loadImage(imageUrl,new ImageLoadListener(position, (AdapterView) parent));
+				holder.imageview.setImageDrawable(cachedImage);
 			}
 			holder.text_content.setText("今日，关于。。。。。。。");
 			holder.text_time.setText("2012-5-10");
@@ -155,10 +159,33 @@ public class ToupiaoActivity extends Activity {
     
     private class ImageLoadListener implements ImageThreadLoader.ImageLoadedListener {
 
+    	 private int position;
+    	 private AdapterView parent;
+    	
+    	 public ImageLoadListener(int position, AdapterView parent) {
+    	      this.position = position;
+    	      this.parent = parent;
+    	    }
+    	 
 		@Override
-		public void imageLoaded(Drawable imageBitmap) {
+		public void imageLoaded(Drawable imageBitmap) {//接口回调 更新ui
 			// TODO Auto-generated method stub
-			
+			 View itemView = parent.getChildAt(position -
+			          parent.getFirstVisiblePosition());
+			      if (itemView == null) {
+			        Log.w(LOG_TAG, "Could not find list item at position " +
+			            position);
+			        return;
+			      }
+			      ImageView img = (ImageView)
+			          itemView.findViewById(R.id.ui_image_gallery);
+			      if (img == null) {
+			        Log.w(LOG_TAG, "Could not find image for list item at " +
+			            "position " + position);
+			        return;
+			      }
+			      Log.d(LOG_TAG, "Drawing image at position " + position);
+			      img.setImageDrawable(imageBitmap);
 		}
     	
     }
