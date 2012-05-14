@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -201,6 +202,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 	 */
 	@Override
 	public void setViewFlow(ViewFlow view) {
+//		Log.e("setViewFlow","setViewFlow");
 		resetTimer();
 		viewFlow = view;
 		flowWidth = viewFlow.getWidth();
@@ -215,6 +217,7 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 	 */
 	@Override
 	public void onScrolled(int h, int v, int oldh, int oldv) {
+//		Log.e("onScrolled","onScrolled");
 		setVisibility(View.VISIBLE);
 		resetTimer();
 		currentScroll = h;

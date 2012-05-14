@@ -1,5 +1,8 @@
 package com.zzz.toupiao;
+
 import com.zzz.image.ImageThreadLoader;
+import com.zzz.toupiao.VoteResultActivity.MyHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -10,6 +13,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,23 +31,24 @@ import android.widget.TextView;
 public class ToupiaoActivity extends Activity {
     /** Called when the activity is first created. */
 	private static final String LOG_TAG = ToupiaoActivity.class.getName();
-	private ViewFlow viewFlow;
+    private ViewFlow viewFlow ;
 	private String[] mdata={"ces","ces" ,"ces" ,"ces","ces"};
 	Context m_context; 
 	Button m_vote_button;
-	
+	Handler handler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toupiao_layout);
         m_context=this;
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
-		
 		final VoteAdapter voteAdapter=new VoteAdapter(this);
-		viewFlow.setAdapter(voteAdapter, 0);
+		viewFlow.setAdapter(voteAdapter, 0,this);
 		m_vote_button=(Button)findViewById(R.id.framelayout_vote_button);
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		viewFlow.setFlowIndicator(indic);
+		String IMEI=getImei();
+//		 handler=new MyHandler();
 		m_vote_button.setOnClickListener(new Button.OnClickListener(){
 
 			@Override
@@ -53,7 +61,24 @@ public class ToupiaoActivity extends Activity {
 			}
 			
 		});
+		
     }
+    
+  //获取设备的唯一标示
+    private  String getImei(){
+    	 TelephonyManager tm = (TelephonyManager) this.getSystemService(TELEPHONY_SERVICE);
+    	  String imei= tm.getDeviceId();
+    	  return imei;
+    }
+    
+    public void setButton(int mCurrentBufferIndex) {
+		// TODO Auto-generated method stub
+		Log.e(LOG_TAG, "setButton");
+//		 Message msg = new Message();
+//		 msg.what=mCurrentBufferIndex;
+//		 ToupiaoActivity.this.handler.sendMessage(msg);
+    	m_vote_button.setText("已投票");
+	}
     
     public void dialog() {
 		Intent intent=new Intent();
@@ -64,8 +89,29 @@ public class ToupiaoActivity extends Activity {
     @Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+		Log.e(LOG_TAG, "onConfigurationChanged");
 		viewFlow.onConfigurationChanged(newConfig);
 	}
+    
+
+	public   class MyHandler extends Handler {
+	        public MyHandler() {
+	        }
+
+	        public MyHandler(Looper L) {
+	            super(L);
+	        }
+
+	        @Override
+	        public void handleMessage(Message msg) {
+	            // TODO Auto-generated method stub
+	            Log.d("MyHandler", "handleMessage......");
+	            super.handleMessage(msg);
+	            m_vote_button.setText("已投票");
+
+	        }
+	    }
+    
     
     public class VoteAdapter extends BaseAdapter{
     	private LayoutInflater mInflater;
@@ -156,7 +202,16 @@ public class ToupiaoActivity extends Activity {
         TextView text_state;
         Button   button_vote;
       } 
-    
+    private class ButtonListener implements ViewFlow.ViewSwitchListener{
+
+		@Override
+		public void onSwitched(View view, int position) {
+			// TODO Auto-generated method stub
+			  Log.w(LOG_TAG, "get view item at position " +
+			            position);
+		}
+    	
+    }
     private class ImageLoadListener implements ImageThreadLoader.ImageLoadedListener {
 
     	 private int position;
@@ -189,4 +244,6 @@ public class ToupiaoActivity extends Activity {
 		}
     	
     }
+
+
 }

@@ -74,7 +74,9 @@ public class ViewFlow extends AdapterView<Adapter> {
 	private AdapterDataSetObserver mDataSetObserver;
 	private FlowIndicator mIndicator;
 	private int mLastOrientation = -1;
-
+//	final ToupiaoActivity m_toupaio=new ToupiaoActivity();
+	Context m_context;
+	
 	private OnGlobalLayoutListener orientationChangeListener = new OnGlobalLayoutListener() {
 
 		@Override
@@ -503,16 +505,16 @@ public class ViewFlow extends AdapterView<Adapter> {
 
 	@Override
 	public void setAdapter(Adapter adapter) {
-		setAdapter(adapter, 0);
+		setAdapter(adapter, 0,m_context);
 	}
 	
-	public void setAdapter(Adapter adapter, int initialPosition) {
+	public void setAdapter(Adapter adapter, int initialPosition,Context context) {
 		if (mAdapter != null) {
 			mAdapter.unregisterDataSetObserver(mDataSetObserver);
 		}
 
 		mAdapter = adapter;
-
+		m_context=context;
 		if (mAdapter != null) {
 			mDataSetObserver = new AdapterDataSetObserver();
 			mAdapter.registerDataSetObserver(mDataSetObserver);
@@ -715,6 +717,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 					}
 				}
 			}
+			Log.e("AdapterDataSetObserver", "AdapterDataSetObserver");
 			resetFocus();
 		}
 
@@ -732,5 +735,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 				", X: " + mScroller.getCurrX() + ", Y: " + mScroller.getCurrY());
 		Log.d("viewflow", "IndexInAdapter: " + mCurrentAdapterIndex
 				+ ", IndexInBuffer: " + mCurrentBufferIndex);
+		((ToupiaoActivity) m_context).setButton(mCurrentBufferIndex);
+
 	}
 }

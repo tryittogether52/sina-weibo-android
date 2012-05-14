@@ -226,7 +226,7 @@ public class ImageThreadLoader {
 	    public static String getCachePath(Context context) {
 		      //根据是否存在sd 进行存储
 	    	File path=null;
-	    	if(isExistSDCard()&&getSDCardRemainingSpace()>10*1024){
+	    	if(isExistSDCard()&&getSDCardRemainingSpace()/(1024*1024)>5){// 存储到sd卡 判断 sd 卡的空间大小
 	    		path = new File(Environment.getExternalStorageDirectory(),
 	    				 ImageThreadLoader.class.getName());
 	    	}else
@@ -248,7 +248,7 @@ public class ImageThreadLoader {
 	          public void run() {
 //	            String oldPath=getCachePath(context);
 	            String oldPath = context.getFilesDir().getAbsolutePath();
-	            removeFiles(oldPath, ".{22}==$", 0);
+	            removeFiles(oldPath, ".{22}==$", 7);
 	            removeFiles(getCachePath(context), ".{22}==$", 7);
 	          }
 
