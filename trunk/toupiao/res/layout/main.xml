@@ -79,14 +79,14 @@
           </RelativeLayout>
            
       </LinearLayout>
-      <Button
+   <!--     <Button
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:id="@+id/ui_vote_button"
               android:layout_gravity="bottom"
               android:text="投票中"
               android:visibility="gone"
-           />
+           />-->
      <!--  <TextView android:layout_width="fill_parent"
           android:layout_height="30dip"/>--> 
 </LinearLayout>

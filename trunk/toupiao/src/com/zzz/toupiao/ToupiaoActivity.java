@@ -1,17 +1,12 @@
 package com.zzz.toupiao;
 
 import com.zzz.image.ImageThreadLoader;
-import com.zzz.toupiao.VoteResultActivity.MyHandler;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,25 +20,26 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class ToupiaoActivity extends Activity {
     /** Called when the activity is first created. */
 	private static final String LOG_TAG = ToupiaoActivity.class.getName();
     private ViewFlow viewFlow ;
-	private String[] mdata={"ces","ces" ,"ces" ,"ces","ces"};
-	Context m_context; 
+	private String[] mdata;
 	Button m_vote_button;
 	Handler handler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.toupiao_layout);
-        m_context=this;
+        mdata=new String[5];
+		mdata[0]="ce";
+		mdata[1]="ce";
         viewFlow = (ViewFlow) findViewById(R.id.viewflow);
 		final VoteAdapter voteAdapter=new VoteAdapter(this);
 		viewFlow.setAdapter(voteAdapter, 0,this);
+		
 		m_vote_button=(Button)findViewById(R.id.framelayout_vote_button);
 		CircleFlowIndicator indic = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
 		viewFlow.setFlowIndicator(indic);
@@ -141,8 +137,14 @@ public class ToupiaoActivity extends Activity {
 		}
 
 		@Override
-		public View getView(final int position, View convertView,final ViewGroup parent) {
+		public View getView( int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
+			
+			return drawView(position,convertView, parent);
+		}
+		
+		private View drawView(int position, View convertView,final ViewGroup parent) {
+			
 			ViewHolder holder ;
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.main, null);
@@ -151,47 +153,98 @@ public class ToupiaoActivity extends Activity {
 				holder.text_title=(TextView)convertView.findViewById(R.id.ui_titile_content);
 				holder.imageview=(ImageView)convertView.findViewById(R.id.ui_image_gallery);
 				holder.text_state=(TextView)convertView.findViewById(R.id.ui_vote_status);
-				holder.button_vote=(Button)convertView.findViewById(R.id.ui_vote_button);
+//				holder.button_vote=(Button)convertView.findViewById(R.id.ui_vote_button);
+				holder.text_promble=(TextView)convertView.findViewById(R.id.ui_vote_proble);
 				holder.text_time=(TextView)convertView.findViewById(R.id.ui_vote_time);
 				convertView.setTag(holder);
 			}else{
 				holder = (ViewHolder) convertView.getTag();
 			}
-			String imageUrl = null;
-			imageUrl="http://media.npr.org/assets/img/2012/05/11/brooks_sq.jpg?t=1336748245";
-			if(imageUrl!=null){
-				Drawable cachedImage = imageLoader.loadImage(imageUrl,new ImageLoadListener(position, (AdapterView) parent));
-				holder.imageview.setImageDrawable(cachedImage);
-			}
-			holder.text_content.setText("今日，关于。。。。。。。");
-			holder.text_time.setText("2012-5-10");
-			holder.text_state.setText("投票进行中");
-			holder.button_vote.setText("投票进行中");
-			holder.text_title.setText("投票内容");
-			holder.button_vote.setOnClickListener(new Button.OnClickListener(){
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-//					 VoteDialog dialog=new VoteDialog(getApplicationContext());
-//					dialog.show();
-//					dialog();
-//					Log.e("TEST","TEST"+position);
+			
+			final String o = (String) getItem(position);
+			if(o!=null){
+				String imageUrl = null;
+//				imageUrl="http://media.npr.org/assets/img/2012/05/11/brooks_sq.jpg?t=1336748245";
+				imageUrl="http://lh5.ggpht.com/_mrb7w4gF8Ds/TCpetKSqM1I/AAAAAAAAD2c/Qef6Gsqf12Y/s144-c/_DSC4374%20copy.jpg";
+				if(imageUrl!=null){
+					Drawable cachedImage = imageLoader.loadImage(imageUrl,new ImageLoadListener(position, (AdapterView) parent));
+					holder.imageview.setImageDrawable(cachedImage);
 				}
-				
-			});
+				holder.text_content.setVisibility(View.VISIBLE);
+				holder.text_time.setVisibility(View.VISIBLE);
+				holder.text_state.setVisibility(View.VISIBLE);
+				holder.text_promble.setVisibility(View.VISIBLE);
+				holder.text_title.setVisibility(View.VISIBLE);
+				holder.text_content.setText("今日，关于。。。。。。。");
+				holder.text_time.setText("2012-5-10");
+				holder.text_state.setText("投票进行中");
+//				holder.button_vote.setText("投票进行中");
+				holder.text_title.setText("投票内容");
+			}else{
+				holder.text_content.setVisibility(View.INVISIBLE);
+				holder.text_time.setVisibility(View.INVISIBLE);
+				holder.text_state.setVisibility(View.INVISIBLE);
+				holder.text_promble.setVisibility(View.INVISIBLE);
+				holder.text_title.setVisibility(View.INVISIBLE);
+				new LoadContentTask().execute(position, convertView,parent);
+			}
+//			holder.button_vote.setOnClickListener(new Button.OnClickListener(){
+//
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+////					 VoteDialog dialog=new VoteDialog(getApplicationContext());
+////					dialog.show();
+////					dialog();
+////					Log.e("TEST","TEST"+position);
+//				}
+//				
+//			});
 			
 			return convertView;
 			
+			
 		}
 		
-//		public void dialog() {
-//			Intent intent=new Intent();
-//			intent.setClass(ToupiaoActivity.this, VoteActvity.class);
-//			startActivity(intent);
-//
-//			 }
-    	
+		private class LoadContentTask extends AsyncTask<Object, Object, Object> {
+			
+			private Integer position;
+			private View view;
+			private ViewGroup  parent;
+			@Override
+			protected void onPreExecute() {
+				// 在doInBackground执行之前触发,显示进度条
+//				if(!isNetworkAvailable()){
+//					setNetWork();
+//					return;
+//				}
+				super.onPreExecute();
+			}
+			@Override
+			protected Object doInBackground(Object... arg) {
+				position = (Integer) arg[0];
+				view = (View) arg[1];
+				parent=(ViewGroup)arg[2];
+	// long-term task is here 			
+				try {
+					Thread.sleep(10000); // do nothing for 3000 miliseconds (3 second)
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+
+			protected void onPostExecute(Object result) {
+	// process result    	 
+//				mdata[position] = (String) result;
+				mdata[position]="ce";
+		    	drawView(position, view,parent);
+
+		    	view.postInvalidate();
+		     }
+
+		}	
     }
 
     static class ViewHolder {
@@ -200,7 +253,8 @@ public class ToupiaoActivity extends Activity {
         TextView text_title;
         TextView text_time;
         TextView text_state;
-        Button   button_vote;
+        TextView text_promble;
+//        Button   button_vote;
       } 
     private class ButtonListener implements ViewFlow.ViewSwitchListener{
 

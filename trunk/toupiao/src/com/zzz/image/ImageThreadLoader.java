@@ -47,7 +47,7 @@ public class ImageThreadLoader {
 		    return new ImageThreadLoader(new MemoryCache());
 		  }
 	 
-	public static ImageThreadLoader getOnDiskInstance(Context context) {
+	public static ImageThreadLoader getOnDiskInstance(Context context) {//
 	    return new ImageThreadLoader(new DiskCache(context));
 	  }
 
@@ -109,7 +109,7 @@ public class ImageThreadLoader {
 	
 	 public Drawable loadImage(final String uri,final ImageLoadedListener//加载图片
 		      listener){
-		 // 假如有存在图片直接去图片
+		 // 假如有存在图片直接根据uri去取图片
 		 if (cache.containsKey(uri)) {
 		      Bitmap ref = cache.get(uri);
 		      if (ref != null) {
@@ -206,7 +206,7 @@ public class ImageThreadLoader {
 	      }
 	    }
 	    
-	    public static String makeCacheFileName(String uri) {// 保存文件经过MD5 和base64 处理保存
+	    public static String makeCacheFileName(String uri) {// 文件名根据uri保存过MD5 和base64 处理保存
 	        if (uri == null) {
 	          return null;
 	        }

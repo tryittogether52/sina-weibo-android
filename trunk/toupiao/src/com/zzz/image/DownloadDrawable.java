@@ -53,7 +53,7 @@ public class DownloadDrawable {
 			    Log.d(LOG_TAG, "Got bitmap");
 			    return bmp;
 			  }
-		  
+		  // 防止图片出现慢连接
 		  static class FlushedInputStream extends FilterInputStream {
 			    public FlushedInputStream(InputStream inputStream) {
 			      super(inputStream);
