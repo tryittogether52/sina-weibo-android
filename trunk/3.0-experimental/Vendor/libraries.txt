@@ -1,0 +1,15 @@
+AFNetworking
+Source: https://github.com/wordpress-mobile/AFNetworking
+Version: beb7477fc50550e2fab219017fdd3008108261bf
+
+XMLRPC
+Source: https://github.com/koke/xmlrpc/tree/wordpress-ios
+Version: dec13ce4044a5a36717d77a661a542903d420176
+
+InAppSettings
+Source: https://github.com/InScopeApps/InAppSettings
+Version: 27706b96b8a7a21132ce8a89d287eff0298db682
+
+Reachability
+Source: https://github.com/tonymillion/Reachability
+Version: 1cf8f0ff987cc473c6be9204eb3abb7f6322a805
