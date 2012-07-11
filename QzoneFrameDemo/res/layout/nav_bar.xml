@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/rw1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="好友动态" />
+
+    <Button
+        android:id="@+id/rw2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="个人主页" />
+       
+    <Button
+        android:id="@+id/rw3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="好友列表" />
+     <Button
+        android:id="@+id/rw4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="应用中心" />
+            
+</LinearLayout>
