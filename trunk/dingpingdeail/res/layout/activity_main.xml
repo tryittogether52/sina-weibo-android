@@ -1,0 +1,75 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    
+    <com.zzz.deail.myScrollView 
+         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fillsocrollview"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+      
+        >
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomlinear"
+            android:orientation="vertical">
+             <LinearLayout android:orientation="vertical" 
+                 android:id="@+id/photo_container" 
+                 android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+            <ImageView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scroll_image"
+                android:src="@drawable/title_image"/>
+            </LinearLayout>
+           
+             <LinearLayout
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/price"
+              android:background="@drawable/filter_btn_bg"
+             android:orientation="horizontal">
+              <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="立即抢购"
+                        android:gravity="center"
+                        android:textSize="18sp"/>
+              </LinearLayout>
+               <TextView 
+                   android:layout_width="fill_parent"
+                   android:layout_height="400dp"
+                   android:text="测试啊1"
+                   android:textSize="18sp"
+                   android:gravity="center"/>
+                <TextView 
+                   android:layout_width="fill_parent"
+                   android:layout_height="400dp"
+                   android:text="测试啊2"
+                   android:textSize="18sp"
+                   android:gravity="center"/>
+                 <TextView 
+                   android:layout_width="fill_parent"
+                   android:layout_height="400dp"
+                   android:text="测试啊3"
+                   android:textSize="18sp"
+                   android:gravity="center"/>
+        </LinearLayout>
+    </com.zzz.deail.myScrollView>
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/headlinear"
+        android:background="@drawable/filter_btn_bg"
+        android:visibility="gone"
+        android:layout_alignParentTop="true">
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即抢购"
+            android:gravity="center"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+  </RelativeLayout>
