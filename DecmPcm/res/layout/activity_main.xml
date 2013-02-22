@@ -1,0 +1,151 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+      
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center_horizontal"
+            android:text=" .so包 测 试"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="start"
+                android:text="开始录音" />
+
+            <Button
+                android:id="@+id/music"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="play"
+                android:text="播放aac" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="aac2wav"
+                android:text="aac2wav" />
+
+            <Button
+                android:id="@+id/wav"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="play"
+                android:text="播放wav" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/audioname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center_horizontal"
+            android:text="速 度 测 试"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/num"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入需要录几秒 默认为30秒" />
+
+        <Button
+            android:id="@+id/recordbtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="record"
+            android:text="开始录音" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="testpcm2aac"
+                android:text="pcm2aac" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="testaac2wac"
+                android:text="aac2wav" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/testaac"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="play"
+                android:text="播放aac" />
+
+            <Button
+                android:id="@+id/testwav"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="play"
+                android:text="播放wav" />
+        </LinearLayout>
+        
+        <Button
+                android:id="@+id/testpcm2aac2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:onClick="start"
+                android:text="边录边转aac" />
+
+        <TextView
+            android:id="@+id/testText"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="clear"
+            android:text="清空所有音频文件" />
+    </LinearLayout>
+
+</ScrollView>
